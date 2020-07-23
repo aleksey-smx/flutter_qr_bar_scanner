@@ -188,16 +188,12 @@ class Preview extends StatelessWidget {
       builder: (context) {
         var nativeOrientation = NativeDeviceOrientationReader.orientation(context);
         
+        frameWidth = width;
+         frameHeight = height;
+        
         int baseOrientation = 0;
         if (orientation != 0 && (width > height)) {
           baseOrientation = orientation ~/ 90;
-          frameHeight = height;
-          frameWidth = width;
-        }
-        
-        if(Platform.isIOS){
-          frameWidth = width;
-          frameHeight = height;
         }
 
 
