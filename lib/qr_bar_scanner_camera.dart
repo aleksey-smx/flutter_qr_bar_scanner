@@ -193,7 +193,9 @@ class Preview extends StatelessWidget {
           baseOrientation = orientation ~/ 90;
           frameHeight = height;
           frameWidth = width;
-        } else if(Platform.isIOS){
+        }
+        
+        if(Platform.isIOS){
           frameWidth = width;
           frameHeight = height;
         }
