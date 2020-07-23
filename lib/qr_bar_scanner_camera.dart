@@ -187,25 +187,34 @@ class Preview extends StatelessWidget {
     return new NativeDeviceOrientationReader(
       builder: (context) {
         var nativeOrientation = NativeDeviceOrientationReader.orientation(context);
-
+        
         int baseOrientation = 0;
         if (orientation != 0 && (width > height)) {
           baseOrientation = orientation ~/ 90;
           frameHeight = height;
           frameWidth = width;
-        } else {
-          frameWidth = height;
-          frameHeight = width;
+        } else if(Platform.isIOS){
+          frameWidth = width;
+          frameHeight = height;
         }
+
 
         int nativeOrientationInt;
         switch (nativeOrientation) {
-          case NativeDeviceOrientation.landscapeLeft:
-            nativeOrientationInt = Platform.isAndroid ? 3 : 1;
+          case NativeDeviceOrientation.landscapeLeft:{
+            if(Platform.isAndroid)
+              nativeOrientationInt = 3;
+            else if(Platform.isIOS)
+              nativeOrientationInt = 1;
             break;
-          case NativeDeviceOrientation.landscapeRight:
-            nativeOrientationInt = Platform.isAndroid ? 1 : 3;
+          }
+          case NativeDeviceOrientation.landscapeRight:{
+            if(Platform.isAndroid)
+              nativeOrientationInt = 1;
+            else if(Platform.isIOS)
+              nativeOrientationInt = 3;
             break;
+          }
           case NativeDeviceOrientation.portraitDown:
             nativeOrientationInt = 2;
             break;
